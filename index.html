@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="theme-color" content="#000000" />
+    <title>Веб калькулятор</title>
+
+    <!-- Манифест для PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <!-- Иконка для PWA -->
+    <link rel="icon" href="/icons/icon-192x192.png" />
+    
+    <style>
+      body {
+        background-color: darkgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Элемент для рендера React компонента -->
+    <div id="app"></div>
+
+    <!-- Подключение скомпилированного JavaScript файла (сделано Vite) -->
+    <script type="module" src="/main.js"></script>
+    <script>
+      // Регистрация Service Worker для PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker зарегистрирован', registration);
+            })
+            .catch((error) => {
+              console.error('Ошибка регистрации Service Worker:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
